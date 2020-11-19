@@ -80,13 +80,10 @@
         name: gosu
 
     - include_role:
+        name: git
+
+    - include_role:
         name: ansible
-
-    - include_role:
-        name: docker
-
-    - include_role:
-        name: libvirt
 
     - include_role:
         name: vagrant
@@ -95,7 +92,10 @@
         name: packer
 
     - include_role:
-        name: git
+        name: docker
+
+    - include_role:
+        name: libvirt
 
     - include_role:
         name: gitlab_runner
