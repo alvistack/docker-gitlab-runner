@@ -34,9 +34,13 @@ Start GitLab Runner:
     # Run as detach
     docker run \
         -itd \
+        --privileged \
         --name gitlab-runner \
         --volume /etc/gitlab-runner:/etc/gitlab-runner \
+        --volume /root/.vagrant.d/boxes:/root/.vagrant.d/boxes \
+        --volume /var/lib/docker:/var/lib/docker \
         --volume /var/run/docker.sock:/var/run/docker.sock \
+        --volume /var/run/libvirt/libvirt-sock:/var/run/libvirt/libvirt-sock \
         alvistack/gitlab-runner
 
 **Success**. GitLab Runner is now available.
