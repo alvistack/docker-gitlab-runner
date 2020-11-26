@@ -26,6 +26,44 @@ Based on [Official Ubuntu Docker Image](https://hub.docker.com/_/ubuntu/) with s
 
 For the `VOLUME` directory that is used to store the repository data (amongst other things) we recommend mounting a host directory as a [data volume](https://docs.docker.com/engine/tutorials/dockervolumes/#/data-volumes), or via a named volume if using a docker version \>= 1.9.
 
+Configure GitLab Runner (`/etc/gitlab-runner/config.toml`):
+
+    concurrent = 1
+    check_interval = 0
+
+    [session_server]
+      session_timeout = 1800
+
+    [[runners]]
+      builds_dir = "/home/gitlab-runner"
+      cache_dir = "/var/cache/gitlab-runner"
+      executor = "docker"
+      name = "alvistack/gitlab-runner"
+      token = "TOKEN"
+      url = "https://gitlab.com/"
+      [runners.docker]
+        cpus = "2"
+        devices = [
+          "/dev/kvm",
+          "/dev/net/tun",
+          "/dev/vhost-net",
+        ]
+        disable_cache = false
+        disable_entrypoint_overwrite = false
+        image = "alvistack/gitlab-runner:latest"
+        memory = "8192m"
+        memory_swap = "8192m"
+        oom_kill_disable = false
+        privileged = false
+        shm_size = 0
+        tls_verify = false
+        volumes = [
+          "/root/.vagrant.d/boxes:/root/.vagrant.d/boxes",
+          "/var/cache/gitlab-runner:/var/cache/gitlab-runner",
+          "/var/run/docker.sock:/var/run/docker.sock",
+          "/var/run/libvirt/libvirt-sock:/var/run/libvirt/libvirt-sock",
+        ]
+
 Start GitLab Runner:
 
     # Pull latest image
@@ -38,10 +76,9 @@ Start GitLab Runner:
         --device /dev/kvm \
         --device /dev/net/tun \
         --device /dev/vhost-net \
-        --volume /etc/gitlab-runner:/etc/gitlab-runner \
+        --volume /etc/gitlab-runner/config.toml:/etc/gitlab-runner/config.toml \
         --volume /root/.vagrant.d/boxes:/root/.vagrant.d/boxes \
-        --volume /var/lib/docker:/var/lib/docker \
-        --volume /var/lib/libvirt:/var/lib/libvirt \
+        --volume /var/cache/gitlab-runner:/var/cache/gitlab-runner \
         --volume /var/run/docker.sock:/var/run/docker.sock \
         --volume /var/run/libvirt/libvirt-sock:/var/run/libvirt/libvirt-sock \
         alvistack/gitlab-runner
