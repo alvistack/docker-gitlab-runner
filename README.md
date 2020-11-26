@@ -34,8 +34,10 @@ Start GitLab Runner:
     # Run as detach
     docker run \
         -itd \
-        --privileged \
         --name gitlab-runner \
+        --device /dev/kvm \
+        --device /dev/vhost-net \
+        --device /dev/net/tun \
         --volume /etc/gitlab-runner:/etc/gitlab-runner \
         --volume /root/.vagrant.d/boxes:/root/.vagrant.d/boxes \
         --volume /var/lib/docker:/var/lib/docker \
