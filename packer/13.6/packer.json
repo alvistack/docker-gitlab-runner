@@ -9,7 +9,7 @@
         "VOLUME /home/gitlab-runner",
         "WORKDIR /home/gitlab-runner",
         "ENTRYPOINT [\"catatonit\", \"-g\", \"--\", \"docker-entrypoint.sh\"]",
-        "CMD [\"gitlab-runner\", \"run\", \"--user=gitlab-runner\", \"--working-directory=/home/gitlab-runner\"]"
+        "CMD [\"gitlab-runner\", \"run\", \"--config=/etc/gitlab-runner/config.toml\", \"--user=gitlab-runner\", \"--working-directory=/home/gitlab-runner\"]"
       ],
       "commit": true,
       "image": "ubuntu:20.04",
