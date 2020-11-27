@@ -14,5 +14,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+gitlab_runner_runners_token: ~
 gitlab_runner_runners_builds_dir: "/home/vagrant"
 gitlab_runner_runners_cache_dir: "/home/vagrant/.cache"

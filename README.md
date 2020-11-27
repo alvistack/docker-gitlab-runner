@@ -66,9 +66,6 @@ Start GitLab Runner:
     docker run \
         -itd \
         --name gitlab-runner \
-        --device /dev/kvm \
-        --device /dev/net/tun \
-        --device /dev/vhost-net \
         --volume /etc/gitlab-runner/config.toml:/etc/gitlab-runner/config.toml \
         --volume /home/vagrant/.cache:/home/vagrant/.cache \
         --volume /var/run/docker.sock:/var/run/docker.sock \
