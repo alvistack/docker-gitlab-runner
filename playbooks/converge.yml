@@ -20,17 +20,17 @@
   tasks:
     - name: groupadd
       group:
-        name: "gitlab-runner"
-        system: true
+        name: "vagrant"
+        system: false
         state: "present"
 
     - name: useradd
       user:
-        name: "gitlab-runner"
-        group: "gitlab-runner"
-        home: "/home/gitlab-runner"
+        name: "vagrant"
+        group: "vagrant"
+        home: "/home/vagrant"
         shell: "/bin/bash"
-        system: true
+        system: false
         create_home: false
         state: "present"
 
