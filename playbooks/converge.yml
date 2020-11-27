@@ -89,6 +89,9 @@
         name: ansible
 
     - include_role:
+        name: docker
+
+    - include_role:
         name: vagrant
 
     - include_role:
@@ -96,9 +99,6 @@
 
     - include_role:
         name: libvirt
-
-    - include_role:
-        name: docker
 
     - include_role:
         name: gitlab_runner
