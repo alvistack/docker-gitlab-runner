@@ -35,19 +35,14 @@ Configure GitLab Runner (`/etc/gitlab-runner/config.toml`):
       session_timeout = 1800
 
     [[runners]]
-      builds_dir = "/home/gitlab-runner"
-      cache_dir = "/var/cache/gitlab-runner"
+      builds_dir = "/home/vagrant"
+      cache_dir = "/home/vagrant/.cache"
       executor = "docker"
       name = "alvistack/gitlab-runner"
       token = "TOKEN"
       url = "https://gitlab.com/"
       [runners.docker]
         cpus = "2"
-        devices = [
-          "/dev/kvm",
-          "/dev/net/tun",
-          "/dev/vhost-net",
-        ]
         disable_cache = false
         disable_entrypoint_overwrite = false
         image = "alvistack/gitlab-runner:latest"
@@ -58,10 +53,8 @@ Configure GitLab Runner (`/etc/gitlab-runner/config.toml`):
         shm_size = 0
         tls_verify = false
         volumes = [
-          "/root/.vagrant.d/boxes:/root/.vagrant.d/boxes",
-          "/var/cache/gitlab-runner:/var/cache/gitlab-runner",
+          "/home/vagrant/.cache:/home/vagrant/.cache",
           "/var/run/docker.sock:/var/run/docker.sock",
-          "/var/run/libvirt/libvirt-sock:/var/run/libvirt/libvirt-sock",
         ]
 
 Start GitLab Runner:
@@ -73,14 +66,9 @@ Start GitLab Runner:
     docker run \
         -itd \
         --name gitlab-runner \
-        --device /dev/kvm \
-        --device /dev/net/tun \
-        --device /dev/vhost-net \
         --volume /etc/gitlab-runner/config.toml:/etc/gitlab-runner/config.toml \
-        --volume /root/.vagrant.d/boxes:/root/.vagrant.d/boxes \
-        --volume /var/cache/gitlab-runner:/var/cache/gitlab-runner \
+        --volume /home/vagrant/.cache:/home/vagrant/.cache \
         --volume /var/run/docker.sock:/var/run/docker.sock \
-        --volume /var/run/libvirt/libvirt-sock:/var/run/libvirt/libvirt-sock \
         alvistack/gitlab-runner
 
 **Success**. GitLab Runner is now available.

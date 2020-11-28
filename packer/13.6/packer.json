@@ -6,10 +6,10 @@
         "ENV LC_ALL en_US.UTF-8",
         "ENV SHELL /bin/bash",
         "ENV TZ UTC",
-        "VOLUME /home/gitlab-runner",
-        "WORKDIR /home/gitlab-runner",
+        "VOLUME /home/vagrant",
+        "WORKDIR /home/vagrant",
         "ENTRYPOINT [\"catatonit\", \"-g\", \"--\", \"docker-entrypoint.sh\"]",
-        "CMD [\"gitlab-runner\", \"run\", \"--config=/etc/gitlab-runner/config.toml\", \"--user=gitlab-runner\", \"--working-directory=/home/gitlab-runner\"]"
+        "CMD [\"gitlab-runner\", \"run\", \"--config=/etc/gitlab-runner/config.toml\", \"--user=vagrant\", \"--working-directory=/home/vagrant\"]"
       ],
       "commit": true,
       "image": "ubuntu:20.04",
