@@ -4,6 +4,8 @@
 
 ### Major Changes
 
+  - Migrate from Travis CI to GitLab CI
+
 ## 13.5.0-4alvistack1 - 2020-11-18
 
   - Ubuntu 20.04 based
