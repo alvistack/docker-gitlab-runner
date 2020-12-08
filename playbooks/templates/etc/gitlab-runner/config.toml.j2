@@ -7,8 +7,8 @@ check_interval = 0
   session_timeout = 1800
 
 [[runners]]
-  builds_dir = "{{ gitlab_runner_runners_builds_dir }}"
-  cache_dir = "{{ gitlab_runner_runners_cache_dir }}"
+  builds_dir = "/home/vagrant"
+  cache_dir = "/var/cache/gitlab-runner"
   executor = "docker"
   name = "{{ gitlab_runner_runners_name }}"
   token = "{{ gitlab_runner_runners_token }}"
@@ -25,6 +25,6 @@ check_interval = 0
     shm_size = 0
     tls_verify = false
     volumes = [
-      "{{ gitlab_runner_runners_cache_dir }}:{{ gitlab_runner_runners_cache_dir }}",
+      "{{ gitlab_runner_runners_cache_dir }}:/var/cache/gitlab-runner",
       "/var/run/docker.sock:/var/run/docker.sock",
     ]
