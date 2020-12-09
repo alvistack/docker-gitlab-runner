@@ -90,10 +90,10 @@
 
     - include_role:
         name: packer
-    
+
     - include_role:
         name: vagrant
-    
+
     - include_role:
         name: docker
 
