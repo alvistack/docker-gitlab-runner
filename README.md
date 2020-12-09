@@ -1,6 +1,6 @@
 # Docker Image Packaging for GitLab Runner
 
-[![Travis](https://img.shields.io/travis/com/alvistack/docker-gitlab-runner.svg)](https://travis-ci.com/alvistack/docker-gitlab-runner)
+[![Gitlab pipeline status](https://img.shields.io/gitlab/pipeline/alvistack/docker-gitlab-runner/master)](https://gitlab.com/alvistack/docker-gitlab-runner/-/pipelines)
 [![GitHub release](https://img.shields.io/github/release/alvistack/docker-gitlab-runner.svg)](https://github.com/alvistack/docker-gitlab-runner/releases)
 [![GitHub license](https://img.shields.io/github/license/alvistack/docker-gitlab-runner.svg)](https://github.com/alvistack/docker-gitlab-runner/blob/master/LICENSE)
 [![Docker Pulls](https://img.shields.io/docker/pulls/alvistack/gitlab-runner.svg)](https://hub.docker.com/r/alvistack/gitlab-runner/)
