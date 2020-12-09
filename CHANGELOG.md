@@ -4,6 +4,10 @@
 
 ### Major Changes
 
+## 13.6.0-4alvistack7 - 2020-12-09
+
+### Major Changes
+
   - Migrate from Travis CI to GitLab CI
 
 ## 13.5.0-4alvistack1 - 2020-11-18
