@@ -1,13 +1,14 @@
 # Docker Image Packaging for GitLab Runner
 
-## 13.6.0-XalvistackY - TBC
+## YYYYMMDD.Y.Z - TBC
 
 ### Major Changes
 
-## 13.6.0-4alvistack7 - 2020-12-09
+## 20201213.0.0 - 2020-12-13
 
 ### Major Changes
 
+  - Change GIT tag as per Vagrant Box naming and versioning limitation
   - Migrate from Travis CI to GitLab CI
 
 ## 13.5.0-4alvistack1 - 2020-11-18
