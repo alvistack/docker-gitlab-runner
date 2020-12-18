@@ -106,6 +106,18 @@
     - include_role:
         name: gitlab_runner
 
+    - name: useradd
+      user:
+        name: "vagrant"
+        group: "{{ item.group }}"
+        append: true
+      loop:
+        - { group: "docker" }
+        - { group: "kvm" }
+        - { group: "libvirt" }
+        - { group: "sudo" }
+        - { group: "vboxusers" }
+
     - name: prepare directories
       file:
         dest: "{{ item.dest }}"
