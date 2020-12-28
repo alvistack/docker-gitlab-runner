@@ -31,10 +31,10 @@ Configure GitLab Runner (`/etc/gitlab-runner/config.toml`):
 
     concurrent = 1
     check_interval = 0
-
+    
     [session_server]
       session_timeout = 1800
-
+    
     [[runners]]
       builds_dir = "/home/vagrant"
       cache_dir = "/home/vagrant/.cache"
