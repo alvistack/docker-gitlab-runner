@@ -1,9 +1,9 @@
 # Docker Image Packaging for GitLab Runner
 
-[![Gitlab pipeline status](https://img.shields.io/gitlab/pipeline/alvistack/docker-gitlab-runner/master)](https://gitlab.com/alvistack/docker-gitlab-runner/-/pipelines)
+[![GitLab pipeline status](https://img.shields.io/gitlab/pipeline/alvistack/docker-gitlab-runner/master)](https://gitlab.com/alvistack/docker-gitlab-runner/-/pipelines)
 [![GitHub release](https://img.shields.io/github/release/alvistack/docker-gitlab-runner.svg)](https://github.com/alvistack/docker-gitlab-runner/releases)
 [![GitHub license](https://img.shields.io/github/license/alvistack/docker-gitlab-runner.svg)](https://github.com/alvistack/docker-gitlab-runner/blob/master/LICENSE)
-[![Docker Pulls](https://img.shields.io/docker/pulls/alvistack/gitlab-runner.svg)](https://hub.docker.com/r/alvistack/gitlab-runner/)
+[![Docker Pulls](https://img.shields.io/docker/pulls/alvistack/gitlab-runner-13.7.svg)](https://hub.docker.com/r/alvistack/gitlab-runner-13.7)
 
 GitLab is a complete DevOps platform, delivered as a single application. This makes GitLab unique and makes Concurrent DevOps possible, unlocking your organization from the constraints of a pieced together toolchain. Join us for a live Q\&A to learn how GitLab can give you unmatched visibility and higher levels of efficiency in a single application across the DevOps lifecycle.
 
@@ -11,8 +11,10 @@ Learn more about GitLab: <https://about.gitlab.com/>
 
 ## Supported Tags and Respective Packer Template Links
 
-  - [`13.7`, `latest`](https://github.com/alvistack/docker-gitlab-runner/blob/master/packer/docker-13.7/packer.json)
-  - [`13.6`](https://github.com/alvistack/docker-gitlab-runner/blob/master/packer/docker-13.6/packer.json)
+  - [`alvistack/gitlab-runner-13.7`](https://hub.docker.com/r/alvistack/gitlab-runner-13.7)
+      - [`packer/docker-13.7/packer.json`](https://github.com/alvistack/docker-gitlab-runner/blob/master/packer/docker-13.7/packer.json)
+  - [`alvistack/gitlab-runner-13.6`](https://hub.docker.com/r/alvistack/gitlab-runner-13.6)
+      - [`packer/docker-13.6/packer.json`](https://github.com/alvistack/docker-gitlab-runner/blob/master/packer/docker-13.6/packer.json)
 
 ## Overview
 
@@ -94,13 +96,13 @@ For evaluations you can use the built-in database that will store its files in t
 
 ## Versioning
 
-### `alvistack/gitlab-runner:latest`
+### `YYYYMMDD.Y.Z`
 
-The `latest` tag matches the most recent [GitHub Release](https://github.com/alvistack/docker-gitlab-runner/releases) of this repository. Thus using `alvistack/gitlab-runner:latest` or `alvistack/gitlab-runner` will ensure you are running the most up to date stable version of this image.
+Release tags could be find from [GitHub Release](https://github.com/alvistack/docker-gitlab-runner/releases) of this repository. Thus using these tags will ensure you are running the most up to date stable version of this image.
 
-### `alvistack/gitlab-runner:<version>`
+### `YYYYMMDD.0.0`
 
-The version tags are rolling release rebuild by [Travis](https://travis-ci.com/alvistack/docker-gitlab-runner) in weekly basis. Thus using these tags will ensure you are running the latest packages provided by the base image project.
+Version tags ended with `.0.0` are rolling release rebuild by [GitLab pipeline](https://gitlab.com/alvistack/docker-gitlab-runner/-/pipelines) in weekly basis. Thus using these tags will ensure you are running the latest packages provided by the base image project.
 
 ## License
 
