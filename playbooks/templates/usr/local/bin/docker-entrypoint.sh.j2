@@ -12,9 +12,9 @@ fi
 # Allow the container to be stated with `--user`
 if [ "$1" = 'gitlab-runner' ] && [ "$(id -u)" = '0' ]; then
     mkdir -p /home/vagrant
-    chown vagrant:vagrant /home/vagrant || echo ${?}
+    chown vagrant:vagrant /home/vagrant || echo $?
     mkdir -p /var/cache/gitlab-runner
-    chown vagrant:vagrant /var/cache/gitlab-runner || echo ${?}
+    chown vagrant:vagrant /var/cache/gitlab-runner || echo $?
 fi
 
 exec "$@"
