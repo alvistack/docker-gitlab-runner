@@ -18,51 +18,39 @@
   remote_user: root
   become: true
   tasks:
-    - name: groupadd
-      group:
-        name: "vagrant"
-        system: false
-        state: "present"
+    - name: include default variables
+      include_vars: "./vars/main.yml"
 
-    - name: useradd
-      user:
-        name: "vagrant"
-        group: "vagrant"
-        home: "/home/vagrant"
-        shell: "/bin/bash"
-        system: false
-        create_home: false
-        state: "present"
+    - name: include release specific variables
+      include_vars: "{{ lookup('first_found', _params) }}"
+      vars:
+        _params:
+          files:
+            - "{{ ansible_distribution | lower }}-{{ ansible_distribution_version | lower }}.yml"
+            - "{{ ansible_distribution | lower }}-{{ ansible_distribution_major_version | lower }}.yml"
+            - "{{ ansible_os_family | lower }}-{{ ansible_distribution_major_version | lower }}.yml"
+            - "{{ ansible_distribution | lower }}.yml"
+            - "{{ ansible_os_family | lower }}.yml"
+          paths:
+            - "./vars"
+      ignore_errors: true
 
-    - name: prepare directories
-      file:
-        dest: "{{ item.dest }}"
-        owner: "{{ item.owner | default('root') }}"
-        group: "{{ item.group | default('root') }}"
-        mode: "{{ item.mode | default('0755') }}"
-        state: "{{ item.state | default('directory') }}"
-      loop:
-        - { dest: "/usr/local/bin" }
+    - name: include release specific tasks
+      include_tasks: "{{ lookup('first_found', _params) }}"
+      vars:
+        _params:
+          files:
+            - "{{ ansible_distribution | lower }}-{{ ansible_distribution_version | lower }}.yml"
+            - "{{ ansible_distribution | lower }}-{{ ansible_distribution_major_version | lower }}.yml"
+            - "{{ ansible_os_family | lower }}-{{ ansible_distribution_major_version | lower }}.yml"
+            - "{{ ansible_distribution | lower }}.yml"
+            - "{{ ansible_os_family | lower }}.yml"
+          paths:
+            - "./tasks"
+      ignore_errors: true
 
-    - name: copy templates
-      template:
-        dest: "{{ item.dest }}"
-        src: "{{ item.src | default('./templates' + item.dest + '.j2') }}"
-        owner: "{{ item.owner | default('root') }}"
-        group: "{{ item.group | default('root') }}"
-        mode: "{{ item.mode | default('0644') }}"
-      loop:
-        - { dest: "/usr/local/bin/docker-entrypoint.sh", mode: "0755" }
-
-    - name: prepare files
-      file:
-        dest: "{{ item.dest }}"
-        owner: "{{ item.owner | default('root') }}"
-        group: "{{ item.group | default('root') }}"
-        mode: "{{ item.mode | default('0644') }}"
-        state: "{{ item.state | default('file') }}"
-      loop:
-        - { dest: "/usr/local/bin/docker-entrypoint.sh", mode: "0755" }
+    - name: include default tasks
+      include_tasks: "./tasks/main.yml"
 
     - name: include role
       include_role:
@@ -108,18 +96,6 @@
       include_role:
         name: docker
 
-    - name: include role
-      include_role:
-        name: libvirt
-
-    - name: include role
-      include_role:
-        name: virtualbox
-
-    - name: include role
-      include_role:
-        name: gitlab_runner
-
     - name: useradd
       user:
         name: "vagrant"
@@ -128,37 +104,51 @@
         state: "present"
       loop:
         - { groups: "docker" }
+
+    - name: include role
+      include_role:
+        name: libvirt
+
+    - name: useradd
+      user:
+        name: "vagrant"
+        groups: "{{ item.groups }}"
+        append: true
+        state: "present"
+      loop:
         - { groups: "kvm" }
         - { groups: "libvirt" }
-        - { groups: "sudo" }
+
+    - name: sudo -u vagrant vagrant plugin install vagrant-libvirt
+      environment:
+        PATH: "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      shell: |
+        set -euo pipefail
+        ln -fs /usr/bin/ld.gold /usr/bin/ld
+        sudo -u vagrant vagrant plugin install vagrant-libvirt
+      args:
+        executable: "/bin/bash"
+      register: result
+      until: result is succeeded
+      changed_when: result is not succeeded
+
+    - name: include role
+      include_role:
+        name: virtualbox
+
+    - name: useradd
+      user:
+        name: "vagrant"
+        groups: "{{ item.groups }}"
+        append: true
+        state: "present"
+      loop:
         - { groups: "vboxusers" }
 
-    - name: prepare directories
-      file:
-        dest: "{{ item.dest }}"
-        owner: "{{ item.owner | default('root') }}"
-        group: "{{ item.group | default('root') }}"
-        mode: "{{ item.mode | default('0755') }}"
-        state: "{{ item.state | default('directory') }}"
-      loop:
-        - { dest: "/etc/gitlab-runner" }
+    - name: include role
+      include_role:
+        name: molecule
 
-    - name: copy templates
-      template:
-        dest: "{{ item.dest }}"
-        src: "{{ item.src | default('./templates' + item.dest + '.j2') }}"
-        owner: "{{ item.owner | default('root') }}"
-        group: "{{ item.group | default('root') }}"
-        mode: "{{ item.mode | default('0644') }}"
-      loop:
-        - { dest: "/etc/gitlab-runner/config.toml" }
-
-    - name: prepare files
-      file:
-        dest: "{{ item.dest }}"
-        owner: "{{ item.owner | default('root') }}"
-        group: "{{ item.group | default('root') }}"
-        mode: "{{ item.mode | default('0644') }}"
-        state: "{{ item.state | default('file') }}"
-      loop:
-        - { dest: "/etc/gitlab-runner/config.toml" }
+    - name: include role
+      include_role:
+        name: gitlab_runner
