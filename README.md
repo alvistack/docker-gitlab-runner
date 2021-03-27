@@ -39,7 +39,7 @@ Configure GitLab Runner (`/etc/gitlab-runner/config.toml`):
     
     [[runners]]
       builds_dir = "/home/vagrant"
-      cache_dir = "/home/vagrant/.cache"
+      cache_dir = "/var/cache/gitlab-runner"
       executor = "docker"
       name = "alvistack/gitlab-runner"
       token = "TOKEN"
@@ -48,7 +48,7 @@ Configure GitLab Runner (`/etc/gitlab-runner/config.toml`):
         cpus = "2"
         disable_cache = false
         disable_entrypoint_overwrite = false
-        image = "alvistack/gitlab-runner:latest"
+        image = "alvistack/gitlab-runner-13.10"
         memory = "8192m"
         memory_swap = "8192m"
         oom_kill_disable = false
@@ -56,7 +56,7 @@ Configure GitLab Runner (`/etc/gitlab-runner/config.toml`):
         shm_size = 0
         tls_verify = false
         volumes = [
-          "/home/vagrant/.cache:/home/vagrant/.cache",
+          "/var/cache/gitlab-runner:/var/cache/gitlab-runner",
           "/var/run/docker.sock:/var/run/docker.sock",
         ]
 
@@ -69,8 +69,8 @@ Start GitLab Runner:
     docker run \
         -itd \
         --name gitlab-runner \
-        --volume /etc/gitlab-runner/config.toml:/etc/gitlab-runner/config.toml \
-        --volume /home/vagrant/.cache:/home/vagrant/.cache \
+        --volume /etc/gitlab-runner:/etc/gitlab-runner \
+        --volume /var/cache/gitlab-runner:/var/cache/gitlab-runner \
         --volume /var/run/docker.sock:/var/run/docker.sock \
         alvistack/gitlab-runner-13.10
 
