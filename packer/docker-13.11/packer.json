@@ -8,8 +8,9 @@
         "ENV TZ UTC",
         "VOLUME /home/vagrant",
         "WORKDIR /home/vagrant",
+        "EXPOSE 22",
         "ENTRYPOINT [\"catatonit\", \"-g\", \"--\", \"docker-entrypoint.sh\"]",
-        "CMD [\"gitlab-runner\", \"run\", \"--config=/etc/gitlab-runner/config.toml\", \"--user=vagrant\", \"--working-directory=/home/vagrant\"]"
+        "CMD [\"/usr/sbin/sshd\", \"-eD\"]"
       ],
       "commit": true,
       "image": "ubuntu:20.04",

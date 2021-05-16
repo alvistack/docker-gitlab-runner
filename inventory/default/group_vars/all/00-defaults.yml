@@ -14,12 +14,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# vagrant
+vagrant_default_provider: "docker"
+
 # gitlab-runner
 gitlab_runner_concurrent: "1"
 gitlab_runner_runners_name: "alvistack/gitlab-runner"
 gitlab_runner_runners_url: ~
 gitlab_runner_runners_token: ~
 gitlab_runner_runners_cache_dir: "/var/cache/gitlab-runner"
-gitlab_runner_runners_docker_cpus: "2"
-gitlab_runner_runners_docker_memory: "8192m"
-gitlab_runner_runners_docker_memory_swap: "8192m"

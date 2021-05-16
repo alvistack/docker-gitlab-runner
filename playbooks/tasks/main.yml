@@ -47,7 +47,6 @@
     mode: "{{ item.mode | default('0755') }}"
     state: "{{ item.state | default('directory') }}"
   loop:
-    - { dest: "/etc/gitlab-runner" }
     - { dest: "/etc/sudoers.d" }
     - { dest: "/home/vagrant", owner: "vagrant", group: "vagrant", mode: "0750" }
     - { dest: "/home/vagrant/.ssh", owner: "vagrant", group: "vagrant", mode: "0700" }
@@ -61,7 +60,6 @@
     group: "{{ item.group | default('root') }}"
     mode: "{{ item.mode | default('0644') }}"
   loop:
-    - { dest: "/etc/gitlab-runner/config.toml" }
     - { dest: "/etc/sudoers.d/vagrant", mode: "0440" }
     - { dest: "/home/vagrant/.ssh/authorized_keys", owner: "vagrant", group: "vagrant", mode: "0600" }
     - { dest: "/usr/local/bin/docker-entrypoint.sh", mode: "0755" }
@@ -74,7 +72,6 @@
     mode: "{{ item.mode | default('0644') }}"
     state: "{{ item.state | default('file') }}"
   loop:
-    - { dest: "/etc/gitlab-runner/config.toml" }
     - { dest: "/etc/sudoers.d/vagrant", mode: "0440" }
     - { dest: "/home/vagrant/.ssh/authorized_keys", owner: "vagrant", group: "vagrant", mode: "0600" }
     - { dest: "/usr/local/bin/docker-entrypoint.sh", mode: "0755" }

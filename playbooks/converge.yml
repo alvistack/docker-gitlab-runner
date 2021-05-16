@@ -60,10 +60,6 @@
 
     - name: include role
       include_role:
-        name: bootstrap
-
-    - name: include role
-      include_role:
         name: python
 
     - name: include role
@@ -81,6 +77,14 @@
     - name: include role
       include_role:
         name: gosu
+
+    - name: include role
+      include_role:
+        name: sshd
+
+    - name: include role
+      include_role:
+        name: bootstrap
 
     - name: include role
       include_role:
@@ -104,12 +108,12 @@
 
     - name: useradd
       user:
-        name: "vagrant"
+        name: "{{ item.name }}"
         groups: "{{ item.groups }}"
         append: true
         state: "present"
       loop:
-        - { groups: "docker" }
+        - { name: "vagrant", groups: "docker" }
 
     - name: include role
       include_role:
@@ -117,21 +121,26 @@
 
     - name: useradd
       user:
-        name: "vagrant"
+        name: "{{ item.name }}"
         groups: "{{ item.groups }}"
         append: true
         state: "present"
       loop:
-        - { groups: "kvm" }
-        - { groups: "libvirt" }
+        - { name: "vagrant", groups: "kvm" }
+        - { name: "vagrant", groups: "libvirt" }
 
     - name: sudo -u vagrant vagrant plugin install vagrant-libvirt
+      become: true
+      become_user: "vagrant"    
       environment:
         PATH: "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
       shell: |
         set -euo pipefail
-        ln -fs /usr/bin/ld.gold /usr/bin/ld
-        sudo -u vagrant vagrant plugin install vagrant-libvirt
+        TMP_DIR="$(mktemp -d)" \
+          && cd $TMP_DIR \
+          && curl -skL -m 300 -O https://github.com/alvistack/vagrant-libvirt-vagrant-libvirt/releases/download/0.4.1/vagrant-libvirt-0.4.1+virt-v2v.gem \
+          && vagrant plugin install $TMP_DIR/vagrant-libvirt-0.4.1+virt-v2v.gem \
+          && rm -rf $TMP_DIR
       args:
         executable: "/bin/bash"
       register: result
@@ -144,12 +153,12 @@
 
     - name: useradd
       user:
-        name: "vagrant"
+        name: "{{ item.name }}"
         groups: "{{ item.groups }}"
         append: true
         state: "present"
       loop:
-        - { groups: "vboxusers" }
+        - { name: "vagrant", groups: "vboxusers" }
 
     - name: include role
       include_role:
