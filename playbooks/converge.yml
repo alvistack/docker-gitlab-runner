@@ -64,6 +64,10 @@
 
     - name: include role
       include_role:
+        name: ansible
+
+    - name: include role
+      include_role:
         name: locales
 
     - name: include role
@@ -89,10 +93,6 @@
     - name: include role
       include_role:
         name: git
-
-    - name: include role
-      include_role:
-        name: ansible
 
     - name: include role
       include_role:
@@ -131,7 +131,7 @@
 
     - name: sudo -u vagrant vagrant plugin install vagrant-libvirt
       become: true
-      become_user: "vagrant"    
+      become_user: "vagrant"
       environment:
         PATH: "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
       shell: |
