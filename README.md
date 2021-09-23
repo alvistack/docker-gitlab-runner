@@ -5,7 +5,7 @@
 [![GitLab pipeline status](https://img.shields.io/gitlab/pipeline/alvistack/docker-gitlab-runner/master)](https://gitlab.com/alvistack/docker-gitlab-runner/-/pipelines)
 [![GitHub release](https://img.shields.io/github/release/alvistack/docker-gitlab-runner.svg)](https://github.com/alvistack/docker-gitlab-runner/releases)
 [![GitHub license](https://img.shields.io/github/license/alvistack/docker-gitlab-runner.svg)](https://github.com/alvistack/docker-gitlab-runner/blob/master/LICENSE)
-[![Docker Pulls](https://img.shields.io/docker/pulls/alvistack/gitlab-runner-14.2.svg)](https://hub.docker.com/r/alvistack/gitlab-runner-14.2)
+[![Docker Pulls](https://img.shields.io/docker/pulls/alvistack/gitlab-runner-14.3.svg)](https://hub.docker.com/r/alvistack/gitlab-runner-14.3)
 
 GitLab is a complete DevOps platform, delivered as a single application. This makes GitLab unique and makes Concurrent DevOps possible, unlocking your organization from the constraints of a pieced together toolchain. Join us for a live Q\&A to learn how GitLab can give you unmatched visibility and higher levels of efficiency in a single application across the DevOps lifecycle.
 
@@ -13,10 +13,10 @@ Learn more about GitLab: <https://about.gitlab.com/>
 
 ## Supported Tags and Respective Packer Template Links
 
+  - [`alvistack/gitlab-runner-14.3`](https://hub.docker.com/r/alvistack/gitlab-runner-14.3)
+      - [`packer/docker-14.3/packer.json`](https://github.com/alvistack/docker-gitlab-runner/blob/master/packer/docker-14.3/packer.json)
   - [`alvistack/gitlab-runner-14.2`](https://hub.docker.com/r/alvistack/gitlab-runner-14.2)
       - [`packer/docker-14.2/packer.json`](https://github.com/alvistack/docker-gitlab-runner/blob/master/packer/docker-14.2/packer.json)
-  - [`alvistack/gitlab-runner-14.1`](https://hub.docker.com/r/alvistack/gitlab-runner-14.1)
-      - [`packer/docker-14.1/packer.json`](https://github.com/alvistack/docker-gitlab-runner/blob/master/packer/docker-14.1/packer.json)
 
 ## Overview
 
@@ -50,7 +50,7 @@ Configure GitLab Runner (`/etc/gitlab-runner/config.toml`):
         cpus = "2"
         disable_cache = false
         disable_entrypoint_overwrite = false
-        image = "alvistack/gitlab-runner-14.2"
+        image = "alvistack/gitlab-runner-14.3"
         memory = "8192m"
         memory_swap = "8192m"
         oom_kill_disable = false
@@ -65,7 +65,7 @@ Configure GitLab Runner (`/etc/gitlab-runner/config.toml`):
 Start GitLab Runner:
 
     # Pull latest image
-    docker pull alvistack/gitlab-runner-14.2
+    docker pull alvistack/gitlab-runner-14.3
     
     # Run as detach
     docker run \
@@ -74,7 +74,7 @@ Start GitLab Runner:
         --volume /etc/gitlab-runner:/etc/gitlab-runner \
         --volume /var/cache/gitlab-runner:/var/cache/gitlab-runner \
         --volume /var/run/docker.sock:/var/run/docker.sock \
-        alvistack/gitlab-runner-14.2
+        alvistack/gitlab-runner-14.3
 
 **Success**. GitLab Runner is now available.
 
