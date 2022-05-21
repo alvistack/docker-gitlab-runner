@@ -18,9 +18,10 @@ namespace: alvistack
 name: docker-gitlab-runner
 description: Docker Image Packaging for GitLab Runner
 
-version: VERSION
+version: 0.0.0
 readme: README.md
-license: Apache-2.0
+license:
+  - Apache-2.0
 
 repository: https://github.com/alvistack/docker-gitlab-runner
 documentation: https://github.com/alvistack/docker-gitlab-runner
