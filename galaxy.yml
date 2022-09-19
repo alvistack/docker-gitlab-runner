@@ -15,7 +15,7 @@
 # limitations under the License.
 
 namespace: alvistack
-name: docker-gitlab-runner
+name: gitlab_runner
 description: Docker Image Packaging for GitLab Runner
 
 version: 0.0.0
